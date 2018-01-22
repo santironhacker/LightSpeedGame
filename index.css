@@ -1,0 +1,24 @@
+/* ----- reset ----- */
+
+html {
+    box-sizing: border-box;   
+}   *, *:before, *:after {     box-sizing: inherit;   }
+
+/* --------- typography ---------- */
+
+/* --------- layout ---------- */
+
+#site-main {
+    border: 1px solid black;
+    max-width: 100px;
+}
+/* --------- components ---------- */
+
+
+/* --------- pages ---------- */
+
+
+/* --------- TEMP ----------
+div, header, section, footer, nav, article, p {
+	border: 1px solid black;
+} */
