@@ -19,11 +19,18 @@ function main () {
 
   var siteMain = document.getElementById('site-main');
   var startButton;
+  var canvasElement;
+  var playAgainButton;
 
   var handleStartClick = function () {
     destroySplash();
     buildGame();
   };
+
+  var handleRestartClick = function () {
+    destroyYouWin();
+    buildGame();
+  }
 
   splash();
 
@@ -52,36 +59,12 @@ function main () {
   /* --- GAME --- */
 
   function buildGame () {
-  var canvasElement = document.createElement('canvas');
-  canvasElement.width = WIDTH;
-  canvasElement.height = HEIGHT;
-  siteMain.appendChild(canvasElement);
-  var ctx = canvasElement.getContext('2d');
-
-
-    
-    // var sourceX = 0;
-    // var sourceY = 0;
-    // var sourceWidth = 150;
-    // var sourceHeight = 150;
-    // var destWidth = sourceWidth;
-    // var destHeight = sourceHeight;
-    // var destX = canvasElement.width / 2 - destWidth / 2;
-    // var destY = canvasElement.height / 2 - destHeight / 2;
-
-    // var imageObj = {};
-    // imageObj.src = 'https://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
-
-    // ctx.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-
-    // var img = new Image();
-    // img.src = 'http://hdwpro.com/space-image.html';
+    var game = new Game (siteMain, canvasElement);
 
     window.setTimeout(function () {
       destroyGame();
       youWin();
     }, 2000);
-
     
   }
 
@@ -91,13 +74,27 @@ function main () {
 
 
 /* --- YOU WIN --- */
-function youWin () {
-  console.log('you win');
-  var title = document.createElement('h1');
-  'You escaped at space light!'
-}
+  function youWin () {
+    // Create local container and title
+    var youWinContainer = document.createElement('div');
+    var title = document.createElement('h1');
+    title.innerHTML = 'You escaped at space light!'
+    youWinContainer.appendChild(title);
+    siteMain.appendChild(youWinContainer);
+    
+    // Create play again button
+    playAgainButton = document.createElement('button');
+    playAgainButton.innerHTML = 'Play again';
+    youWinContainer.appendChild(playAgainButton);
+    playAgainButton.addEventListener('click', handleRestartClick);
+    }
 
+  function destroyYouWin () {
+    playAgainButton.removeEventListener('click', handleRestartClick);
+    siteMain.children[0].remove();
+  }  
 
+   
 }
 
 window.onload = main;
