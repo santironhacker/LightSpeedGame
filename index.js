@@ -8,8 +8,8 @@ function main () {
 
     var SPEED;
     var STAGE;
-    var WIDTH = 600;
-    var HEIGHT = 400;
+    // var WIDTH = 600;
+    // var HEIGHT = 400;
     var SIZE = {
       x : '',
       y : ''
@@ -19,7 +19,7 @@ function main () {
 
   var siteMain = document.getElementById('site-main');
   var startButton;
-  var canvasElement;
+  var game;
   var playAgainButton;
 
   var handleStartClick = function () {
@@ -56,20 +56,26 @@ function main () {
     siteMain.children[0].remove();
   }
 
+  function gameOver () {
+    destroyGame();
+    youWin();
+  }
   /* --- GAME --- */
 
   function buildGame () {
-    var game = new Game (siteMain, canvasElement);
+    game = new Game (siteMain);
 
-    window.setTimeout(function () {
-      destroyGame();
-      youWin();
-    }, 2000);
+    game.onGameOver(gameOver);
+
+    // window.setTimeout(function () {
+    //   destroyGame();
+    //   youWin();
+    // }, 3000);
     
   }
 
   function destroyGame () {
-    canvasElement.remove();
+    game.destroy();
   }
 
 

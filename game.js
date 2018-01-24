@@ -1,30 +1,86 @@
 'use strict'
 
-function Game (siteMain, canvasElement) {
+function Game (siteMain) {
     var self = this;
+
+    self.onEnd;
     
-    canvasElement = document.createElement('canvas');
-    self.width = 600;
-    self.height = 400;
-    canvasElement.height = HEIGHT;
-    siteMain.appendChild(canvasElement);
-    var ctx = canvasElement.getContext('2d');
+    // Create DOM elements: canvas 
+    self.siteMain = siteMain;
+    self.canvasElement = document.createElement('canvas');
+    self.canvasElement.width = 600;
+    self.canvasElement.height = 400;
+    siteMain.appendChild(self.canvasElement);
+    self.ctx = self.canvasElement.getContext('2d');
 
+    // Game settings
+    self.finished = false;
+    self.score = 0;
+    self.level = 0;
 
-        // var sourceX = 0;
-    // var sourceY = 0;
-    // var sourceWidth = 150;
-    // var sourceHeight = 150;
-    // var destWidth = sourceWidth;
-    // var destHeight = sourceHeight;
-    // var destX = canvasElement.width / 2 - destWidth / 2;
-    // var destY = canvasElement.height / 2 - destHeight / 2;
+    self.speed = 2;
 
-    // var imageObj = {};
-    // imageObj.src = 'https://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
+    self.player = new Player(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
+    self.asteroid = new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
+    
+    
+    
+    function checkIfDead(){
+        // debugger;
+        if(self.player.isDead === true){
+            self.finished = true;
+        }
+    }
+    
+    function doFrame() {
+        
+        // Logic
+        // self.score++;
+        
+        // drawing
+        self.ctx.clearRect(0, 0, self.canvasElement.width, self.canvasElement.height);
+        checkIfDead();
+        self.player.update();
+        self.player.draw();
+        // self.ctx.font = '20px Arial, sans-serif';
+        // self.ctx.fillStyle = 'black';
+        // self.ctx.fillText('SCORE:' + self.score,  10, 50);   
 
-    // ctx.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+        if (!self.finished) {
+            // debugger;
+            window.requestAnimationFrame(doFrame);
+        }
+        else if (self.finished){
+            destroy();
+        }
+ 
+    }
 
-    // var img = new Image();
-    // img.src = 'http://hdwpro.com/space-image.html';
+    window.requestAnimationFrame(doFrame);
+
+    self.handleKeyDown = function (event) {
+        var key = event.key.toLowerCase();
+        console.log(key);
+        self.player.update(key);
+    } 
+
+    
+
+    document.addEventListener('keydown', self.handleKeyDown);
 }
+
+Game.prototype.onGameOver = function (callback) {
+    var self = this;
+
+    self.onEnd = callback;
+}
+
+Game.prototype.destroy = function () {
+    debugger;
+    self.finished = true;
+    document.removeEventListener('keydown', self.handleKeyDown);
+    self.canvasElement.remove();
+    destroyGame();
+    youWin();
+}
+
