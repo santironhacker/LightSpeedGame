@@ -2,8 +2,6 @@
 
 function Game (siteMain) {
     var self = this;
-
-    self.onEnd;
     
     // Create DOM elements: canvas 
     self.siteMain = siteMain;
@@ -14,26 +12,20 @@ function Game (siteMain) {
     self.ctx = self.canvasElement.getContext('2d');
 
     // Game settings
+    self.onEnd;
     self.finished = false;
-    self.score = 0;
-    self.level = 0;
+    // self.score = 0;
+    // self.level = 0;
+    // self.speed = 2; 
+    
 
-    self.speed = 2;
-
+    // CREATE PLAYER & ASTEROIDS
     self.player = new Player(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
-    self.asteroid = new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
+    // self.asteroid = new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
     
     
-    
-    function checkIfDead(){
-        // debugger;
-        if(self.player.isDead === true){
-            self.finished = true;
-        }
-    }
-    
-    function doFrame() {
-        
+    // FRAME
+    function doFrame() {    
         // Logic
         // self.score++;
         
@@ -47,40 +39,44 @@ function Game (siteMain) {
         // self.ctx.fillText('SCORE:' + self.score,  10, 50);   
 
         if (!self.finished) {
-            // debugger;
             window.requestAnimationFrame(doFrame);
         }
-        else if (self.finished){
-            destroy();
-        }
- 
     }
-
     window.requestAnimationFrame(doFrame);
 
+
+    // PLAYER KEY COMMANDS
     self.handleKeyDown = function (event) {
         var key = event.key.toLowerCase();
         console.log(key);
         self.player.update(key);
     } 
 
-    
-
     document.addEventListener('keydown', self.handleKeyDown);
+
+    function checkIfDead() {
+        if(self.player.isDead === true) {
+            self.finished = true;
+            self.onEnd();
+
+        }
+    }
+
 }
 
+
+// LAUNCH YOU WIN
 Game.prototype.onGameOver = function (callback) {
     var self = this;
-
     self.onEnd = callback;
-}
+};
 
+
+// ERASE GAME COPY & LISTENERS (callback from index)
 Game.prototype.destroy = function () {
-    debugger;
-    self.finished = true;
+    var self = this;
     document.removeEventListener('keydown', self.handleKeyDown);
     self.canvasElement.remove();
-    destroyGame();
-    youWin();
+    
 }
 

@@ -56,27 +56,18 @@ function main () {
     siteMain.children[0].remove();
   }
 
-  function gameOver () {
-    destroyGame();
-    youWin();
-  }
   /* --- GAME --- */
 
   function buildGame () {
     game = new Game (siteMain);
-
-    game.onGameOver(gameOver);
-
-    // window.setTimeout(function () {
-    //   destroyGame();
-    //   youWin();
-    // }, 3000);
     
+    game.onGameOver( function () {
+      game.destroy();
+      youWin();
+    });
   }
 
-  function destroyGame () {
-    game.destroy();
-  }
+  function gameOver () {}
 
 
 /* --- YOU WIN --- */

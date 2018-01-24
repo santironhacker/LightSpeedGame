@@ -19,7 +19,7 @@ function Player (ctx, speed, canvasWidth, canvasHeight) {
 
 Player.prototype.draw = function () {
     var self = this;
-    console.log('speed is', self.speed)
+    console.log('Player speed is', self.speed)
     self.ctx.fillStyle = 'rgb(0, 255, 255)';
     self.ctx.fillRect(self.stats.x, self.stats.y, self.stats.width, self.stats.height);
 }
@@ -27,8 +27,8 @@ Player.prototype.draw = function () {
 
 Player.prototype.update = function (key) {
     var self = this;
-    console.log(key)
-    // console.log('update done')
+    console.log(key);
+
     if (key === 'o') {
         self.stats.y = self.stats.y - 10;
     }
@@ -40,6 +40,7 @@ Player.prototype.update = function (key) {
         self.stats.x = self.stats.x - 10;
     }
 
+
     if (self.stats.y < 5) {
         self.stats.y = 10; 
     }
@@ -47,7 +48,7 @@ Player.prototype.update = function (key) {
          self.stats.y = self.canvasHeight - 30; 
     }
     if (self.stats.x < 10) {
-        self.isDead = true
+        self.isDead = true;
     }
 }
 
