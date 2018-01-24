@@ -61,13 +61,11 @@ function main () {
   function buildGame () {
     game = new Game (siteMain);
     
-    game.onGameOver( function () {
+    game.onGameOver(function() {
       game.destroy();
       youWin();
     });
   }
-
-  function gameOver () {}
 
 
 /* --- YOU WIN --- */

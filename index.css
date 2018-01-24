@@ -12,6 +12,10 @@ html {
     border: 1px solid black;
     text-align: center;
 }
+
+canvas {
+    border: solid 2px black; 
+}
 /* --------- components ---------- */
 
 

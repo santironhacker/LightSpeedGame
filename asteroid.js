@@ -8,19 +8,26 @@ function Asteroid (ctx, speed, canvasWidth, canvasHeight) {
     self.speed = speed;
     self.ctx = ctx;
     self.stats = {
-        x: 600,
-        y: 200,
+        x: 500,
+        y: Math.random() * canvasHeight,
         width: 40,
         height: 30
     };
-
+    self.isOut = false;
 }
 
 
 Asteroid.prototype.draw = function () {
     var self = this;
     console.log('Asteroid speed is:' + self.speed)
-    self.ctx.clearRect(0,0, 500, 500);
-    self.ctx.fillStyle = 'rgb(0, 255, 255)';
+    self.ctx.fillStyle = 'rgb(255, 0, 255)';
     self.ctx.fillRect(self.stats.x, self.stats.y, self.stats.width, self.stats.height);
+}
+
+Asteroid.prototype.update = function () {
+    var self = this;
+    self.stats.x = self.stats.x - 10;
+    if(self.stats.x < 0) {
+        self.isOut = true;
+    }
 }
