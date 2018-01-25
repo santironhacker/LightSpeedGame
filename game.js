@@ -41,28 +41,58 @@ function Game (siteMain) {
             element.update();
         });
         
+        // || self.player.stats.x  < element.stats.x + element.stats.width
 
         // Detect collision (respective to the player)
         self.asteroids.forEach(function(element) {
-            var collisionRightPlayer = self.player.stats.x + self.player.stats.width;
-            var collisionLeftAsteroid = element.stats.x;
-            var collisionUpPlayer = self.player.stats.y;
-            var collisionDownAsteroid = element.stats.y + element.stats.height;
-
-            var collisionDownPlayer = self.player.stats.y + self.player.stats.height;
-            var collisionUpAsteroid = element.stats.y;
-            var collisionLeftPlayer = self.player.stats.x;
-            var collisionRightAsteroid = element.stats.x + element.stats.width;
-
-            var collisionRight = collisionRightPlayer > collisionLeftAsteroid;
-            var collisionUp = collisionUpPlayer > collisionDownAsteroid;
-            var collisionDown = collisionDownPlayer > collisionUpAsteroid;
-            var collisionLeft = collisionLeftPlayer > collisionRightAsteroid;
-
-            if (collisionUp && collisionRight && collisionDown && collisionLeft) {
-                self.player.isDead = true;
-            }
+                    self.player.isDead = true;
         });
+
+        var playerNEx = self.player.stats.x + self.player.stats.width; 
+        var playerNEy = self.player.stats.y;
+        
+        var playerSEx = self.player.stats.x + self.player.stats.width;
+        var playerSEy = self.player.stats.y + self.player.stats.width;
+        
+        var playerSWx = self.player.stats.x;
+        var playerSWy = self.player.stats.y + self.player.stats.height; 
+
+        var playerNWx = self.player.stats.x;
+        var playerNWy = self.player.stats.y;
+
+
+        var asteroidNEx = element.stats.x + element.stats.width;
+        var asteroidNEy = element.stats.y;
+
+        var asteroidSEx = element.stats.x + element.stats.width;
+        var asteroidSEy = element.stats.y + element.stats.height;
+
+        var asteroidSWx = element.stats.x;
+        var asteroidSWy = element.stats.y + element.stats.height;
+
+        var asteroidNWx = element.stats.x;
+        var asteroidNWy = element.stats.y;
+
+        var CornerNE;
+
+        // if (self.player.stats.x + self.player.stats.width > element.stats.x) {
+        //     if(self.player.stats.y < element.stats.y + element.stats.height || self.player.stats.y + self.player.stats.height > element.stats.y) {
+        //     }
+
+            // var collisionUpPlayer = ;
+            // var collisionDownAsteroid = ;
+
+            // var collisionDownPlayer = self.player.stats.y + self.player.stats.height;
+            // var collisionUpAsteroid = element.stats.y;
+            // var collisionLeftPlayer = self.player.stats.x;
+            // var collisionRightAsteroid = element.stats.x + element.stats.width;
+
+            // var collisionRight = collisionRightPlayer > collisionLeftAsteroid;
+            // var collisionUp = collisionUpPlayer > collisionDownAsteroid;
+            // var collisionDown = collisionDownPlayer > collisionUpAsteroid;
+            // var collisionLeft = collisionLeftPlayer > collisionRightAsteroid;
+
+        
         
         checkIfDead();
         checkIsOut();
