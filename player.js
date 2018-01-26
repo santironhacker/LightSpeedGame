@@ -35,13 +35,13 @@ Player.prototype.update = function (key) {
         self.stats.y = self.stats.y - 20;
     }
     if (key === 's') {
-        self.stats.y = self.stats.y + 15;
+        self.stats.y = self.stats.y + 20;
     }
     if (key === 'a') {
-        self.stats.x = self.stats.x - 15;
+        self.stats.x = self.stats.x - 20;
     }
     if (key === 'd') {
-        self.stats.x = self.stats.x + 15;
+        self.stats.x = self.stats.x + 20;
     }
 
     if (self.stats.y < 0) {
