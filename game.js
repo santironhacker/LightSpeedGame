@@ -6,23 +6,35 @@ function Game (siteMain) {
   // Create DOM elements: canvas 
   self.siteMain = siteMain;
   self.canvasElement = document.createElement('canvas');
-  self.canvasElement.setAttribute
   self.canvasElement.width = 600;
   self.canvasElement.height = 400;
   siteMain.appendChild(self.canvasElement);
   self.ctx = self.canvasElement.getContext('2d');
 
+  // Audio
+  self.gameMusic = document.createElement('audio');
+  self.gameMusic.setAttribute('src', './sounds/StarWarsMainTheme.mp3');
+  self.gameMusic.setAttribute('autoplay', 'true');
+  siteMain.appendChild(self.gameMusic);
+
+  //self.audioElement = document.createElement('audio');
+  //self.audioElement.innerHTML('<source src="./sounds/StarWarsMainTheme.mp3" type="audio.mp3"/>')
+  
+  
+  // self.snd = new Audio("./sounds/StarWarsMainTheme.mp3");
+  // self.snd.play();
+
   // Set image background
   self.backImg = new Image();
   self.backImg.src = './images/SpaceBacksimple.jpg';
 
-  self.lastAsteroidCreatedAt = null;
+  // self.lastAsteroidCreatedAt = null;
 
   // Game settings
   self.onEnd = null;
   self.finished = false;
   self.speed = 2; 
-  self.level = 0;
+  self.level = 1;
   // self.score = 0;
 
   window.setInterval(function () {
@@ -30,14 +42,26 @@ function Game (siteMain) {
       self.level += 1;
   }, 3000);
 
-
-
   // CREATE PLAYER & ASTEROIDS
   self.player = new Player(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
   self.asteroids = [];
-  window.setInterval(function () {
-      self.asteroids.push(new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height));    
-  }, 1000);
+  self.launchAsteroids = true; 
+  intervalAsteroidsManager(self.launchAsteroids);
+  self.intervalIDasteroids;
+
+  // intervalIDasteroids = window.setInterval(function () {
+  //     self.asteroids.push(new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height));    
+  // }, 1000);
+
+  function intervalAsteroidsManager(launchAsteroids) {
+    if(launchAsteroids)
+      self.intervalIDasteroids = setInterval(function () {
+        self.asteroids.push(new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height));    
+      }, 1000);
+    else {
+      clearInterval(self.intervalIDasteroids);
+    }
+  }
 
   // FRAME
   window.requestAnimationFrame(doFrame);
@@ -46,7 +70,6 @@ function Game (siteMain) {
     // self.score++;
     self.ctx.clearRect(0, 0, self.canvasElement.width, self.canvasElement.height);
     self.ctx.drawImage(self.backImg, 0, 0, 600, 400);
-
 
     // is is time to add another asteroid?
     // var now = Date.now();
@@ -119,6 +142,19 @@ function Game (siteMain) {
     if(self.player.isDead === true) {
       self.finished = true;
       self.onEnd();
+      // self.launchAsteroids = false; 
+      // intervalAsteroidsManager(self.launchAsteroids);
+      
+      // self.intervalIDasteroids;
+      // self.launchAsteroids = true; 
+      // intervalAsteroidsManager(self.launchAsteroids);
+
+      // self.ctx.clearRect(0, 0, self.canvasElement.width, self.canvasElement.height);
+      // window.clearInterval(self.intervalIDasteroids);
+      // self.intervalIDasteroids;
+      // window.setTimeout(intervalIDasteroids, 0);
+      // clearRect(self.player.stats.x, self.player.stats.y, self.player.stats.width, self.player.stats.height);
+      // self.player.draw()
     }
   }
 
@@ -144,7 +180,7 @@ Game.prototype.onGameOver = function (callback) {
 Game.prototype.destroy = function () {
   var self = this;
   document.removeEventListener('keydown', self.handleKeyDown);
+  self.gameMusic.remove();
   self.canvasElement.remove();
-  
 }
 
