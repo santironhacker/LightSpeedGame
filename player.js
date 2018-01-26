@@ -8,12 +8,12 @@ function Player (ctx, speed, canvasWidth, canvasHeight) {
     self.speed = speed;
     self.ctx = ctx;
     self.stats = {
-        x: 50,
-        y: 80,
         width: 40,
-        height: 30
+        height: 30,
+        x: 50,
+        y: canvasHeight/2 - 15
     };
-    self.isDead = false
+    self.isDead = false;
 }
 
 
@@ -30,25 +30,30 @@ Player.prototype.update = function (key) {
     console.log(key);
 
     if (key === 'o') {
-        self.stats.y = self.stats.y - 10;
+        self.stats.y = self.stats.y - 15;
     }
-    console.log(self.stats.y)
     if (key === 'l') {
-        self.stats.y = self.stats.y + 10;
+        self.stats.y = self.stats.y + 15;
     }
     if (key === 'k') {
-        self.stats.x = self.stats.x - 10;
+        self.stats.x = self.stats.x - 15;
+    }
+    if (key === 'ñ') {
+        self.stats.x = self.stats.x + 15;
     }
 
-
-    if (self.stats.y < 5) {
-        self.stats.y = 10; 
+    if (self.stats.y < 0) {
+        self.stats.y = 0; 
     }
-    if (self.stats.y > self.canvasHeight - 30) {
-         self.stats.y = self.canvasHeight - 30; 
+    if (self.stats.y > self.canvasHeight - self.stats.height) {
+         self.stats.y = self.canvasHeight - self.stats.height; 
     }
-    if (self.stats.x < 10) {
+    if (self.stats.x < 0) {
         self.isDead = true;
+        //self.stats.x = 0;
+    }
+    if (self.stats.x + self.stats.width > self.canvasWidth) {
+        self.stats.x = self.canvasWidth - self.stats.width;
     }
 }
 

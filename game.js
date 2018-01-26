@@ -12,28 +12,43 @@ function Game (siteMain) {
     siteMain.appendChild(self.canvasElement);
     self.ctx = self.canvasElement.getContext('2d');
 
+    // Set image background
+    self.backImg = new Image();
+    self.backImg.src = './images/SpaceBack.jpg';
+
     // Game settings
     self.onEnd;
     self.finished = false;
     self.speed = 2; 
-    
+    self.level = 0;
     // self.score = 0;
-    // self.level = 0;
 
-    
+    window.setInterval(function () {
+        self.speed += 2;
+        self.level += 1;
+    }, 3000);
+
+
 
     // CREATE PLAYER & ASTEROIDS
     self.player = new Player(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
     self.asteroids = [];
     window.setInterval(function () {
         self.asteroids.push(new Asteroid(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height));    
-    }, 500);
+    }, 1000);
     
+    
+    
+
     // FRAME
+    window.requestAnimationFrame(doFrame);
+
     function doFrame() {    
         
         // self.score++;
         self.ctx.clearRect(0, 0, self.canvasElement.width, self.canvasElement.height);
+        self.ctx.drawImage(self.backImg, 0, 0, 600, 400);
+        
         self.player.update();
         self.asteroids.forEach(function(element) {
             element.update();
@@ -42,34 +57,14 @@ function Game (siteMain) {
         self.player.draw();
         self.asteroids.forEach(function(element) {
             element.draw();
+        });
+
+        self.ctx.font = '20px Arial, sans-serif';
+        self.ctx.fillStyle = 'yellow';
+        self.ctx.fillText('LEVEL:' + self.level,  10, 50, 100);
 
         // Detect collision (respective to the player)
         self.asteroids.forEach(function(element) {
-
-        // var playerNEx = self.player.stats.x + self.player.stats.width; 
-        // var playerNEy = self.player.stats.y;
-        
-        // var playerSEx = self.player.stats.x + self.player.stats.width;
-        // var playerSEy = self.player.stats.y + self.player.stats.width;
-        
-        // var playerSWx = self.player.stats.x;
-        // var playerSWy = self.player.stats.y + self.player.stats.height; 
-
-        // var playerNWx = self.player.stats.x;
-        // var playerNWy = self.player.stats.y;
-
-
-        // var asteroidNEx = element.stats.x + element.stats.width;
-        // var asteroidNEy = element.stats.y;
-
-        // var asteroidSEx = element.stats.x + element.stats.width;
-        // var asteroidSEy = element.stats.y + element.stats.height;
-
-        // var asteroidSWx = element.stats.x;
-        // var asteroidSWy = element.stats.y + element.stats.height;
-
-        // var asteroidNWx = element.stats.x;
-        // var asteroidNWy = element.stats.y;
 
         var collisionUpPlayer = self.player.stats.y;
         var collisionDownAsteroid = element.stats.y + element.stats.height;
@@ -83,41 +78,22 @@ function Game (siteMain) {
         var collisionRighPlayer = self.player.stats.x + self.player.stats.width;
         var collisionLeftAsteroid = element.stats.x;
 
-        // var collisionRight = collisionRighPlayer > collisionLeftAsteroid;
-        // var collisionUp = collisionUpPlayer > collisionDownAsteroid;
-
-        // var collisionDown = collisionDownPlayer > collisionUpAsteroid;
-        // var collisionLeft = collisionLeftPlayer > collisionRightAsteroid;
-
-
         var collisionCondition1 = ( ((collisionRighPlayer > collisionLeftAsteroid)&&(collisionLeftPlayer < collisionLeftAsteroid))  &&   (((collisionUpPlayer < collisionDownAsteroid)&&(collisionDownPlayer > collisionDownAsteroid)) || ((collisionDownPlayer > collisionUpAsteroid)&&(collisionUpPlayer < collisionUpAsteroid))) );
-        // var collisionCondition2 = ( (collisionRighPlayer > collisionLeftAsteroid) && (collisionLeftPlayer < collisionRightAsteroid) || (collisionUpPlayer < collisionDownAsteroid) )
+        var collisionCondition2 = ( ((collisionLeftPlayer < collisionRightAsteroid)&&(collisionRighPlayer > collisionRightAsteroid)) &&  (((collisionUpPlayer < collisionDownAsteroid)&&(collisionUpPlayer > collisionUpAsteroid)) || ((collisionDownPlayer > collisionUpAsteroid)&&(collisionDownPlayer < collisionDownAsteroid))) );
 
-        if (collisionCondition1) {
-            debugger;
-            // self.player.isDead = true;
+        if (collisionCondition1 || collisionCondition2) {
+            self.player.isDead = true;
         }
         });
-
         
-
-        
-        
-        checkIfDead();
         checkIsOut();
-        
-        });
-        // self.ctx.font = '20px Arial, sans-serif';
-        // self.ctx.fillStyle = 'black';
-        // self.ctx.fillText('SCORE:' + self.score,  10, 50);   
-
-        
+        checkIfDead();
 
         if (!self.finished) {
             window.requestAnimationFrame(doFrame);
         }
     }
-    window.requestAnimationFrame(doFrame);
+
 
     // PLAYER KEY COMMANDS
     self.handleKeyDown = function (event) {
@@ -130,6 +106,10 @@ function Game (siteMain) {
 
     // Check if player has collided & restart level
     function checkIfDead() {
+        if(self.level === 4) {
+            self.finished = true;
+            self.onEnd();
+        }
         if(self.player.isDead === true) {
             self.finished = true;
             self.onEnd();

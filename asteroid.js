@@ -11,7 +11,7 @@ function Asteroid (ctx, speed, canvasWidth, canvasHeight) {
         x: 500,
         y: Math.random() * canvasHeight,
         width: 40,
-        height: 30
+        height: 40
     };
     self.isOut = false;
 }
@@ -24,9 +24,10 @@ Asteroid.prototype.draw = function () {
     self.ctx.fillRect(self.stats.x, self.stats.y, self.stats.width, self.stats.height);
 }
 
+
 Asteroid.prototype.update = function () {
     var self = this;
-    self.stats.x = self.stats.x - 10;
+    self.stats.x = self.stats.x - 1*(self.speed);
     if(self.stats.x < 0) {
         self.isOut = true;
     }
