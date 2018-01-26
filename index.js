@@ -1,22 +1,8 @@
 'use strict';
 
-//Start coding here
+  /* --- FUNCTION MAIN --- */
 
 function main () {
-
-  /* --- GLOBAL VARIABLES --- */
-
-    var SPEED;
-    var STAGE;
-    // var WIDTH = 600;
-    // var HEIGHT = 400;
-    var SIZE = {
-      x : '',
-      y : ''
-    }
-    
-    
-
   var siteMain = document.getElementById('site-main');
   var startButton;
   var game;
@@ -37,18 +23,18 @@ function main () {
 /* --- SPLASH --- */
 
   function splash () {
-  // Create local container and title
-  var splash = document.createElement('div');
-  var title = document.createElement('h1');
+    // Create local container and title
+    var splash = document.createElement('div');
+    var title = document.createElement('h1');
     title.innerHTML = 'LIGHT-SPEED';
     splash.appendChild(title);
     siteMain.appendChild(splash);
   
-  // Create start button
-  startButton = document.createElement('button');
-  startButton.innerHTML = 'Start Game';
-  splash.appendChild(startButton);
-  startButton.addEventListener('click', handleStartClick);
+    // Create start button
+    startButton = document.createElement('button');
+    startButton.innerHTML = 'Start Game';
+    splash.appendChild(startButton);
+    startButton.addEventListener('click', handleStartClick);
   }
 
   function destroySplash () {
@@ -82,7 +68,7 @@ function main () {
     playAgainButton.innerHTML = 'Play again';
     youWinContainer.appendChild(playAgainButton);
     playAgainButton.addEventListener('click', handleRestartClick);
-    }
+  }
 
   function destroyYouWin () {
     playAgainButton.removeEventListener('click', handleRestartClick);

@@ -14,14 +14,18 @@ function Player (ctx, speed, canvasWidth, canvasHeight) {
         y: canvasHeight/2 - 15
     };
     self.isDead = false;
+
+    self.falconImg = new Image();
+    self.falconImg.src = './images/falcon-noBackground.png';
 }
 
 
 Player.prototype.draw = function () {
     var self = this;
     console.log('Player speed is', self.speed)
-    self.ctx.fillStyle = 'rgb(0, 255, 255)';
-    self.ctx.fillRect(self.stats.x, self.stats.y, self.stats.width, self.stats.height);
+    // self.ctx.fillStyle = 'rgb(0, 255, 255)';
+    // self.ctx.fillRect(self.stats.x, self.stats.y, self.stats.width, self.stats.height);
+    self.ctx.drawImage(self.falconImg, self.stats.x, self.stats.y, self.stats.width, self.stats.height);
 }
 
 
@@ -56,25 +60,3 @@ Player.prototype.update = function (key) {
         self.stats.x = self.canvasWidth - self.stats.width;
     }
 }
-
-
-
-
-
-    // INSERT PLAYER IMAGE 
-    // var sourceX = 0;
-    // var sourceY = 0;
-    // var sourceWidth = 150;
-    // var sourceHeight = 150;
-    // var destWidth = sourceWidth;
-    // var destHeight = sourceHeight;
-    // var destX = canvasElement.width / 2 - destWidth / 2;
-    // var destY = canvasElement.height / 2 - destHeight / 2;
-
-    // var imageObj = {};
-    // imageObj.src = 'https://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
-
-    // ctx.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-
-    // var img = new Image();
-    // img.src = 'http://hdwpro.com/space-image.html';
