@@ -22,7 +22,7 @@ function Game (siteMain) {
 
   // Set image background
   self.backImg = new Image();
-  self.backImg.src = './images/SpaceBacksimple.jpg';
+  self.backImg.src = './images/spaceBackSimple.jpg';
 
   // self.lastAsteroidCreatedAt = null;
 
