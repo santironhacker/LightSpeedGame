@@ -51,8 +51,8 @@ Player.prototype.update = function (key) {
          self.stats.y = self.canvasHeight - self.stats.height; 
     }
     if (self.stats.x < 0) {
-        self.isDead = true;
-        //self.stats.x = 0;
+        self.stats.x = 0;
+        // self.isDead = true;
     }
     if (self.stats.x + self.stats.width > self.canvasWidth) {
         self.stats.x = self.canvasWidth - self.stats.width;

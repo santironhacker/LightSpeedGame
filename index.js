@@ -7,8 +7,8 @@ function main () {
   var startButton;
   var game;
   var playAgainButton;
-  var splashMusic;
-  var youWinMusic;
+  // var splashMusic;
+  // var youWinMusic;
 
   var handleStartClick = function () {
     destroySplash();
@@ -39,15 +39,15 @@ function main () {
     startButton.addEventListener('click', handleStartClick);
 
     // Audio
-    splashMusic = document.createElement('audio');
-    splashMusic.setAttribute('src', './sounds/StarWarsMainTheme.mp3');
-    splashMusic.setAttribute('autoplay', 'true');
-    siteMain.appendChild(splashMusic);
+    // splashMusic = document.createElement('audio');
+    // splashMusic.setAttribute('src', './sounds/StarWarsMainTheme.mp3');
+    // splashMusic.setAttribute('autoplay', 'true');
+    // siteMain.appendChild(splashMusic);
   }
 
   function destroySplash () {
     startButton.removeEventListener('click', handleStartClick);
-    splashMusic.remove();
+    // splashMusic.remove();
     siteMain.children[0].remove();
   }
 
@@ -79,16 +79,16 @@ function main () {
     playAgainButton.addEventListener('click', handleRestartClick);
 
     // Audio
-    youWinMusic = document.createElement('audio');
-    youWinMusic.setAttribute('src', './sounds/StarWarsEndCreditsTheme.mp3');
-    youWinMusic.setAttribute('autoplay', 'true');
-    siteMain.appendChild(youWinMusic);
+    // youWinMusic = document.createElement('audio');
+    // youWinMusic.setAttribute('src', './sounds/StarWarsEndCreditsTheme.mp3');
+    // youWinMusic.setAttribute('autoplay', 'true');
+    // siteMain.appendChild(youWinMusic);
   }
 
   function destroyYouWin () {
     playAgainButton.removeEventListener('click', handleRestartClick);
     siteMain.children[0].remove();
-    youWinMusic.remove();
+    // youWinMusic.remove();
   }  
 
    

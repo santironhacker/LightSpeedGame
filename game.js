@@ -12,15 +12,11 @@ function Game (siteMain) {
   self.ctx = self.canvasElement.getContext('2d');
 
   // Audio
-  self.gameMusic = document.createElement('audio');
-  self.gameMusic.setAttribute('src', './sounds/StarWarsAsteroidField.mp3');
-  self.gameMusic.setAttribute('autoplay', 'true');
-  siteMain.appendChild(self.gameMusic);
+  // self.gameMusic = document.createElement('audio');
+  // self.gameMusic.setAttribute('src', './sounds/StarWarsAsteroidField.mp3');
+  // self.gameMusic.setAttribute('autoplay', 'true');
+  // siteMain.appendChild(self.gameMusic);
 
-  //self.audioElement = document.createElement('audio');
-  //self.audioElement.innerHTML('<source src="./sounds/StarWarsMainTheme.mp3" type="audio.mp3"/>')
-  
-  
   // self.snd = new Audio("./sounds/StarWarsMainTheme.mp3");
   // self.snd.play();
 
@@ -180,7 +176,7 @@ Game.prototype.onGameOver = function (callback) {
 Game.prototype.destroy = function () {
   var self = this;
   document.removeEventListener('keydown', self.handleKeyDown);
-  self.gameMusic.remove();
+  // self.gameMusic.remove();
   self.canvasElement.remove();
 }
 
