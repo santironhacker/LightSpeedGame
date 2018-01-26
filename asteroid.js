@@ -10,8 +10,8 @@ function Asteroid (ctx, speed, canvasWidth, canvasHeight) {
     self.stats = {
         x: 500,
         y: Math.random() * canvasHeight,
-        width: 40,
-        height: 40
+        width: 60,
+        height: 60
     };
     self.isOut = false;
 
@@ -22,7 +22,7 @@ function Asteroid (ctx, speed, canvasWidth, canvasHeight) {
 
 Asteroid.prototype.draw = function () {
     var self = this;
-    console.log('Asteroid speed is:' + self.speed);
+    console.log('Asteroid speed is:' + self.speed)
     self.ctx.drawImage(self.asteroidImg, self.stats.x, self.stats.y, self.stats.width, self.stats.height);
 }
 

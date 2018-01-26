@@ -13,7 +13,7 @@ function Game (siteMain) {
 
   // Audio
   self.gameMusic = document.createElement('audio');
-  self.gameMusic.setAttribute('src', './sounds/StarWarsMainTheme.mp3');
+  self.gameMusic.setAttribute('src', './sounds/StarWarsAsteroidField.mp3');
   self.gameMusic.setAttribute('autoplay', 'true');
   siteMain.appendChild(self.gameMusic);
 
@@ -38,9 +38,9 @@ function Game (siteMain) {
   // self.score = 0;
 
   window.setInterval(function () {
-      self.speed += 2;
+      self.speed += 1.5;
       self.level += 1;
-  }, 3000);
+  }, 10000);
 
   // CREATE PLAYER & ASTEROIDS
   self.player = new Player(self.ctx, self.speed, self.canvasElement.width, self.canvasElement.height);
@@ -135,7 +135,7 @@ function Game (siteMain) {
 
   // Check if player has collided & restart level
   function checkIfDead() {
-    if(self.level === 4) {
+    if(self.level === 10) {
       self.finished = true;
       self.onEnd();
     }
