@@ -13,7 +13,7 @@ function Game (siteMain, level) {
 
   // Set image background
   self.backImg = new Image();
-  self.backImg.src = './images/spaceBackSimple.jpg';
+  self.backImg.src = './images/simpleSpaceBack.jpeg';
 
   // Set game music
   self.gameMusic = document.createElement('audio');
