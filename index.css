@@ -9,20 +9,327 @@ html {
 /* --------- layout ---------- */
 
 #site-main {
-    border: 1px solid black;
-    text-align: center;
+    /* border: 3px solid greenyellow; */
 }
 
 canvas {
-    border: solid 2px black; 
+    /* border: solid 3px blue;  */
 }
-/* --------- components ---------- */
 
+
+
+
+/* STAR WARS text */
+
+#titles
+{
+	position: absolute;
+	width: 18em;
+	height: 50em;
+	bottom: 0;
+	left: 50%;
+	margin-left: -9em;
+	font-size: 350%;
+	font-weight: bold;
+	text-align: justify;
+	overflow: hidden;
+	transform-origin: 50% 100%;
+	transform: perspective(300px) rotateX(25deg);
+}
+
+#titles:after
+{
+	position: absolute;
+	content: ' ';
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 60%;
+	background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+	pointer-events: none;
+}
+
+#titlecontent
+{
+	position: absolute;
+	top: 100%;
+    animation: scroll 100s linear 4s infinite;
+}
+
+@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+
+
+
+
+/* STAR WARS logo */
+/* Animation properties */
+.star {
+    animation: star 10s ease-out 1;
+  }
+  .wars {
+    animation: wars 10s ease-out 1;
+  }
+  .by-line {
+    animation: move-byline 6s linear 1;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+
+  /* Keyframes */
+  @keyframes star {
+    0% {
+      opacity: 0;
+      transform: scale(1.5) translateY(-0.75em);
+    }
+    30% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateZ(-1000em);
+    }
+  }
+
+  @keyframes wars {
+    0% {
+      opacity: 0;
+      transform: scale(1.5) translateY(0.5em);
+    }
+    30% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateZ(-1000em);
+    }
+  }
+
+  /* @keyframes spin-letters {
+    0%, 10% {
+      opacity: 0;
+      transform: rotateY(90deg);
+    }
+    30% {
+      opacity: 1;
+    }
+    70%, 86% {
+      transform: rotateY(0);
+      opacity: 1;
+    }
+    95%, 100% {
+      opacity: 0;
+    }
+  } */
+
+  @keyframes move-byline {
+    0% {
+      opacity: 0;
+      transform: translateZ(5em);
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateZ(0);
+    }
+  }
+
+  /* Make the 3D work on the container */
+
+  /* General styles and layout */
+
+  .starwars-demo {
+    perspective: 800px;
+    transform-style: preserve3d;
+    height: 17em;
+    left: 50%;
+    position: absolute;
+    top: 53%;
+    transform: translate(-50%, -50%);
+    width: 34em;
+  }
+
+  .by-line span {
+    display: inline-block;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .star, .wars, .by-line {
+    position: absolute;
+  }
+
+  .star {
+    top: -1.5em;
+  }
+
+  .wars {
+    bottom: -0.5em;
+  }
+
+  .by-line {
+    color: #fff;
+    font-family: "ITC Serif Gothic", Lato;
+    font-size: 2.25em;
+    left: -2em;
+    letter-spacing: 0.4em;
+    right: -2em;
+    text-align: center;
+    text-transform: uppercase;
+    top: 29%;
+  }
+
+  .welcome-menu {
+    color: yellow;
+    text-align: center;
+    padding-top: 20%;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+
+  .welcome-text {
+    margin: -6% 16% 0% 16%;
+  }
+  
+  .start-button {
+    padding: 22px;
+    font-size: 16px;
+    border-radius: 16px; 
+    margin-top: 4%;
+  }
+
+  .welcome-warning {
+    margin: 2% 8%;
+  }
+
+  .welcome-instructions {
+    margin: 2% 24%;
+  }
+
+  .toggle {
+    margin: 15px;
+  }
+
+  .item-list {
+    text-align: left;
+    padding-left: 41%;
+  }
+
+  /*** Scroll up menu ***/
+  /* .scroll-up {
+    animation: scroll-up 100sx;
+    overflow-y: hidden;
+    max-height: 500px;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  } */
+
+  .scroll-up {
+    animation: scroll-up 3s linear 0.2s 1 forwards;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+
+  @keyframes scroll-up {
+    0%   {top:53%;}
+    100% {top:18%;}
+  }
+
+  /*** Media queries for adjusting to different screen sizes ***/
+  
+  @media only screen and (max-width: 600px) {
+    .starwars-demo {
+      font-size: 10px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .starwars-demo {
+      font-size: 7px;
+    }
+  }
+
+
+
+/*   SLIDER   */
+
+.container {
+    border:1px solid lime;
+    overflow:hidden;
+    position:relative;
+    /* the container's height will determine the height of its slider  */
+    height:350px; 
+}
+
+
+.slider {
+	overflow-y: scroll;
+	/* complete liquid height based on the parent's height!! */
+    height:100%;
+
+    /* only transition on transform properties which are hardware accelerated = way better performances */
+	-webkit-transition:-webkit-transform .3s ease;
+       -moz-transition:   -moz-transform .3s ease;
+        -ms-transition:    -ms-transform .3s ease;
+            transition:        transform .3s ease;
+}
+
+.slider.opened { 
+    /* visible */
+    -webkit-transform: translate(0, 0%);
+       -moz-transform: translate(0, 0%);
+        -ms-transform: translate(0, 0%);
+            transform: translate(0, 0%);
+}
+.slider.closed { 
+    /* completely offscreen */
+    -webkit-transform: translate(0, -100%);
+       -moz-transform: translate(0, -100%);
+        -ms-transform: translate(0, -100%);
+            transform: translate(0, -100%);
+}
+
+
+
+/* --------- YOU WIN SCREEN ---------- */
+
+.you-win {
+  text-align: center;
+  padding-top: 21%;
+  font-size: 20px;
+  font-family: "ITC Serif Gothic", Lato;
+  color: yellow;
+  /* animation: rotationCredits 2s 10 linear;  */
+}
+
+.play-again {
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 14px;
+}
+
+/* @keyframes rotationCredits {
+  from {
+    transform: rotationCredits(0deg);
+  } 
+  to {
+    transform: rotationCredits(359deg);
+  }
+} */
 
 /* --------- pages ---------- */
 
 
-/* --------- TEMP ----------
-div, header, section, footer, nav, article, p {
-	border: 1px solid black;
-} */
+/* --------- TEMP ---------- */

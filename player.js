@@ -22,25 +22,23 @@ function Player (ctx, speed, canvasWidth, canvasHeight) {
 
 Player.prototype.draw = function () {
     var self = this;
-    console.log('Player speed is', self.speed)
     self.ctx.drawImage(self.falconImg, self.stats.x, self.stats.y, self.stats.width, self.stats.height);
 }
 
 
 Player.prototype.update = function (key) {
     var self = this;
-    console.log(key);
 
-    if (key === 'w') {
+    if (key === 'o') {
         self.stats.y = self.stats.y - 20;
     }
-    if (key === 's') {
+    if (key === 'l') {
         self.stats.y = self.stats.y + 20;
     }
-    if (key === 'a') {
+    if (key === 'k') {
         self.stats.x = self.stats.x - 20;
     }
-    if (key === 'd') {
+    if (key === 'ñ') {
         self.stats.x = self.stats.x + 20;
     }
 
