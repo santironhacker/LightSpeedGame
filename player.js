@@ -29,16 +29,16 @@ Player.prototype.draw = function () {
 Player.prototype.update = function (key) {
     var self = this;
 
-    if (key === 'o') {
+    if (key === 'w') {
         self.stats.y = self.stats.y - 20;
     }
-    if (key === 'l') {
+    if (key === 's') {
         self.stats.y = self.stats.y + 20;
     }
-    if (key === 'k') {
+    if (key === 'a') {
         self.stats.x = self.stats.x - 20;
     }
-    if (key === 'ñ') {
+    if (key === 'd') {
         self.stats.x = self.stats.x + 20;
     }
 
@@ -50,7 +50,6 @@ Player.prototype.update = function (key) {
     }
     if (self.stats.x < 0) {
         self.stats.x = 0;
-        // self.isDead = true;
     }
     if (self.stats.x + self.stats.width > self.canvasWidth) {
         self.stats.x = self.canvasWidth - self.stats.width;

@@ -83,7 +83,7 @@ function Game (siteMain, level) {
   self.fires = [];
   self.handleKeyDown = function (event) {
     var key = event.key.toLowerCase();
-    if(key === 'q') {
+    if(key === 'p') {
       self.finished = true;
       self.onGameQuit();
     }

@@ -126,19 +126,19 @@ function main () {
       welcomeMenu.appendChild(instructions);
 
       var itemList1 = document.createElement('li');
-      itemList1.innerHTML = 'Go up: O';
+      itemList1.innerHTML = 'Go up: W';
       itemList1.setAttribute('class', 'item-list');
       instructions.appendChild(itemList1);
       var itemList2 = document.createElement('li'); 
-      itemList2.innerHTML = 'Go down: L';
+      itemList2.innerHTML = 'Go down: S';
       itemList2.setAttribute('class', 'item-list');
       instructions.appendChild(itemList2);
       var itemList3 = document.createElement('li'); 
-      itemList3.innerHTML = 'Go down: Ñ';
+      itemList3.innerHTML = 'Go right: D';
       itemList3.setAttribute('class', 'item-list');
       instructions.appendChild(itemList3);
       var itemList4 = document.createElement('li'); 
-      itemList4.innerHTML = 'Go down: K';
+      itemList4.innerHTML = 'Go left: A';
       itemList4.setAttribute('class', 'item-list');
       instructions.appendChild(itemList4);
       var itemList5 = document.createElement('li'); 
@@ -147,7 +147,7 @@ function main () {
       instructions.appendChild(itemList5);
 
       var itemList6 = document.createElement('li'); 
-      itemList6.innerHTML = 'Quit game: Q';
+      itemList6.innerHTML = 'Quit game: P';
       itemList6.setAttribute('class', 'item-list');
       instructions.appendChild(itemList6);
 
